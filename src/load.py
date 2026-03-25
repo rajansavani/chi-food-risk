@@ -115,6 +115,8 @@ def load_risk_scores(engine):
     print(f"Loading risk scores from {RISK_SCORES_PATH}...")
 
     df = pd.read_csv(RISK_SCORES_PATH)
+    df = df.dropna(subset=["establishment_id"])
+
     df.to_sql("risk_scores", engine, if_exists="append", index=False, chunksize=5000)
 
     print(f"  Loaded {len(df):,} establishment risk scores")

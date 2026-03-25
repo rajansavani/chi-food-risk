@@ -19,7 +19,7 @@ A restaurant that failed its last 5 inspections with rodent violations has the s
 Computes a dynamic risk score (0–100) for every establishment based on what actually happened during inspections:
 
 - Failure rate: weighted by inspection type (a fail during a food poisoning investigation counts more than a routine canvass fail)
-- Violation severity: — hybrid scoring using structured violation codes (1–14 = critical, 15–29 = serious) and NLP keyword extraction on inspector free-text comments
+- Violation severity: hybrid scoring using structured violation codes (1–14 = critical, 15–29 = serious) and NLP keyword extraction on inspector free-text comments
 - Recency: recent failures score higher via exponential decay
 - Trend: compares recent inspections against historical average to detect places getting worse
 
