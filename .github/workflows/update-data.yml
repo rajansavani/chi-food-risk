@@ -1,0 +1,35 @@
+name: Weekly Data Refresh
+
+on:
+  schedule:
+    - cron: "0 18 * * 5"
+
+  # allow manual trigger from the GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run ingestion
+        run: python src/ingest.py
+
+      - name: Run transformation
+        run: python src/transform.py
+
+      - name: Load into database
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python src/load.py
